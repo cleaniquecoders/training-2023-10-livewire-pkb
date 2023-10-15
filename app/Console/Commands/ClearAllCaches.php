@@ -25,10 +25,13 @@ class ClearAllCaches extends Command
      */
     public function handle()
     {
-        $this->call('config:clear');
-        $this->call('cache:clear');
-        $this->call('event:clear');
-        $this->call('route:clear');
-        $this->call('view:clear');
+        $this->callSilent('config:clear');
+        $this->callSilent('cache:clear');
+        $this->callSilent('event:clear');
+        $this->callSilent('route:clear');
+        $this->callSilent('view:clear');
+
+        // $this->info("All caches cleared.");
+        $this->components->info('All caches cleared.');
     }
 }
