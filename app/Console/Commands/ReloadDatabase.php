@@ -12,7 +12,7 @@ class ReloadDatabase extends Command
      *
      * @var string
      */
-    protected $signature = 'reload-database';
+    protected $signature = 'reload-database {--demo} {--dev} {--uat}';
 
     /**
      * The console command description.
@@ -33,9 +33,33 @@ class ReloadDatabase extends Command
         $this->call('migrate:fresh');
 
         $this->call('db:seed');
-        
+
         $this->call('db:seed', [
             '--class' => PrepareSeeder::class,
         ]);
+
+        if($this->option('demo')) {
+            $this->components->info('Seeding demo data');
+            // call demo seeder
+            // $this->call('db:seed', [
+            //     '--class' => PrepareSeeder::class,
+            // ]);
+        }
+
+        if($this->option('dev')) {
+            $this->components->info('Seeding dev data');
+            // call dev seeder
+            // $this->call('db:seed', [
+            //     '--class' => PrepareSeeder::class,
+            // ]);
+        }
+
+        if($this->option('uat')) {
+            $this->components->info('Seeding uat data');
+            // call uat seeder
+            // $this->call('db:seed', [
+            //     '--class' => PrepareSeeder::class,
+            // ]);
+        }
     }
 }
