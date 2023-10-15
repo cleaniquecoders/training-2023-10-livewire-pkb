@@ -26,3 +26,13 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 });
+
+Route::post('locale/{locale}', function($locale){
+    if(!in_array($locale, ['en', 'ms'])) {
+        $locale = 'en';
+    }
+
+    app()->setLocale($locale);
+
+    return redirect()->back();
+});
