@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,4 +36,15 @@ Route::post('locale/{locale}', function($locale){
     app()->setLocale($locale);
 
     return redirect()->back();
+});
+
+Route::get('articles', function() {
+    // $articles = Article::with('user')->paginate(100);
+    $articles = Article::paginate(100);
+
+    echo "<ol>";
+    foreach ($articles as $article) {
+        echo "<li>$article->topic - ".$article->user->name."</li>";
+    }
+    echo "</ol>";
 });

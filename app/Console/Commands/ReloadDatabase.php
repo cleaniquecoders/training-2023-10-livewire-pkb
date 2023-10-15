@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Database\Seeders\DevSeeder;
 use Database\Seeders\PrepareSeeder;
 use Illuminate\Console\Command;
 
@@ -49,9 +50,9 @@ class ReloadDatabase extends Command
         if($this->option('dev')) {
             $this->components->info('Seeding dev data');
             // call dev seeder
-            // $this->call('db:seed', [
-            //     '--class' => PrepareSeeder::class,
-            // ]);
+            $this->call('db:seed', [
+                '--class' => DevSeeder::class,
+            ]);
         }
 
         if($this->option('uat')) {
