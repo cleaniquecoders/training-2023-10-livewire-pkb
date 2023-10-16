@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Scopes\Active;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -59,18 +60,37 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    /**
+     * The "booted" method of the model.
+     */
+    // protected static function booted(): void
+    // {
+    //     static::addGlobalScope(new Active);
+    // }
+
     public function articles()
     {
         return $this->hasMany(Article::class);
     }
 
+    // Local Scope
     public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
 
+    // Local Scope
     public function scopeInActive($query)
     {
         return $query->where('is_active', false);
+    }
+
+    public function scopeSearch($query, $keyword)
+    {
+        return $query->where(function($query) use ($keyword) {
+            return $query
+                ->orWhere('name', 'like', '%'.$keyword.'%')
+                ->orWhere('email', 'like', '%'.$keyword.'%');
+        });
     }
 }
