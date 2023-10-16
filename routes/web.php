@@ -3,6 +3,7 @@
 use App\Livewire\Counter;
 use App\Livewire\Search;
 use App\Models\Article;
+use App\Livewire\ContactUs;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,6 +32,8 @@ Route::middleware([
 
 
     Route::get('/search-user', Search::class);
+
+    Route::get('/contact-us', ContactUs::class);
 
 });
 
