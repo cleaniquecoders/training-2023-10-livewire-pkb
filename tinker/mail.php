@@ -1,5 +1,6 @@
 <?php
 
+use App\Jobs\SendMail;
 use App\Mail\SupportRequest;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -10,9 +11,10 @@ $emails = [
 ];
 
 foreach ($emails as $email) {
-    Mail::to($email)->send(
-        new SupportRequest(Str::random(255)),
-    );
+    SendMail::dispatch(
+        $email,
+        new SupportRequest('Send mail from queue.')
+    )->onQueue('mailing');
 }
 
 exit;
