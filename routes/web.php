@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\Counter;
 use App\Models\Article;
 use Illuminate\Support\Facades\Route;
 
@@ -48,3 +49,5 @@ Route::get('articles', function() {
     }
     echo "</ol>";
 });
+
+Route::get('/counter', Counter::class);
