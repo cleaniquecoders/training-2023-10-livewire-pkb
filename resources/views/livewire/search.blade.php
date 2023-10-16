@@ -7,7 +7,17 @@
 
     <div>
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-            <x-input wire:model.live="search" class="w-full" placeholder="Search user by name or email..." />
+            <x-input wire:model.live.debounce.500ms="search" class="w-full"
+                placeholder="Search user by name or email..." />
+
+            <div class="flex justify-between">
+                <span class="my-2">Search for: <span class="italic" x-text="$wire.search"></span></span>
+
+                <div class="my-2" wire:loading>
+                    Searching...
+                </div>
+                
+            </div>
 
             <div class="max-h-72 overflow-y-auto my-4">
 
