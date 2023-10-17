@@ -45,15 +45,17 @@
                     <table class="min-w-full divide-y divide-gray-300">
                         <thead>
                             <tr>
-                                <th scope="col"
-                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
-                                    Name
+                                <th scope="col" wire:click="setSort('name')"
+                                    class="cursor-pointer py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                    <x-sortable :sortDirection="$sortDirection" label="Name" :show="$sortBy == 'name'"  />
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    E-mail
+                                <th wire:click="setSort('email')" scope="col"
+                                    class="cursor-pointer px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <x-sortable :sortDirection="$sortDirection" label="E-mail" :show="$sortBy == 'email'"  />
                                 </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    Status
+                                <th wire:click="setSort('is_active')" scope="col"
+                                    class="cursor-pointer px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    <x-sortable :sortDirection="$sortDirection" label="Status" :show="$sortBy == 'is_active'"  />
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-sm font-semibold text-gray-900 text-center">
                                     Actions</th>
@@ -74,14 +76,15 @@
                                         {{ $user->name }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->email }}
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->is_active ? 'Active' : 'Inactive' }}
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $user->is_active ? 'Active' : 'Inactive' }}
                                     </td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-around flex">
 
                                         <x-secondary-button class="mx-2"
                                             onclick="confirm('Are you sure want to set status {{ $user->name }} to {{ $user->is_active ? 'inactive' : 'active' }} ?') || event.stopImmediatePropagation()"
-                                            wire:click="setStatus({{ $user->id }}, {{ $user->is_active ? 0 : 1}})">
-                                            Set {{ $user->is_active ? 'Inactive' : 'Active'}}
+                                            wire:click="setStatus({{ $user->id }}, {{ $user->is_active ? 0 : 1 }})">
+                                            Set {{ $user->is_active ? 'Inactive' : 'Active' }}
                                         </x-secondary-button>
                                         <x-secondary-button class="mx-2">
                                             View

@@ -20,6 +20,12 @@ class UserDatatable extends Component
     #[Url(as: 'status')]
     public $isActive;
 
+    #[Url]
+    public $sortBy = 'id';
+
+    #[Url]
+    public $sortDirection = 'asc';
+
     public function removeUser($id)
     {
         if(auth()->user()->id == $id) {
@@ -27,6 +33,13 @@ class UserDatatable extends Component
         }
 
         User::where('id', $id)->delete();
+    }
+
+    public function setSort($field)
+    {
+        $this->sortBy = $field;
+
+        $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
     }
 
     public function setStatus($id, $status)
@@ -55,7 +68,9 @@ class UserDatatable extends Component
                 ->when(
                     strlen($this->search) > 3,
                     fn($query) => $query->search($this->search)
-                )->paginate($this->perPage),
+                )
+                ->orderBy($this->sortBy, $this->sortDirection)
+                ->paginate($this->perPage),
         ]);
     }
 }
