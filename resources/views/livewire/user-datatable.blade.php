@@ -53,10 +53,7 @@
                                     E-mail
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    E-mail Verified At
-                                </th>
-                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
-                                    Joined At
+                                    Status
                                 </th>
                                 <th scope="col" class="px-3 py-3.5 text-sm font-semibold text-gray-900 text-center">
                                     Actions</th>
@@ -77,12 +74,15 @@
                                         {{ $user->name }}</td>
                                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->email }}
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $user->email_verified_at }}
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->is_active ? 'Active' : 'Inactive' }}
                                     </td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                                        {{ $user->created_at }}</td>
-                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-center flex">
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-around flex">
+
+                                        <x-secondary-button class="mx-2"
+                                            onclick="confirm('Are you sure want to set status {{ $user->name }} to {{ $user->is_active ? 'inactive' : 'active' }} ?') || event.stopImmediatePropagation()"
+                                            wire:click="setStatus({{ $user->id }}, {{ $user->is_active ? 0 : 1}})">
+                                            Set {{ $user->is_active ? 'Inactive' : 'Active'}}
+                                        </x-secondary-button>
                                         <x-secondary-button class="mx-2">
                                             View
                                         </x-secondary-button>

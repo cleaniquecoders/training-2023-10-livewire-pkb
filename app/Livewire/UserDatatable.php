@@ -20,6 +20,17 @@ class UserDatatable extends Component
         User::where('id', $id)->delete();
     }
 
+    public function setStatus($id, $status)
+    {
+        if(auth()->user()->id == $id) {
+            return;
+        }
+
+        User::where('id', $id)->update([
+            'is_active' => $status,
+        ]);
+    }
+
     public function render()
     {
         return view('livewire.user-datatable', [
