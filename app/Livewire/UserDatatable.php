@@ -37,9 +37,13 @@ class UserDatatable extends Component
 
     public function setSort($field)
     {
-        $this->sortBy = $field;
+        if($this->sortBy == $field) {
+            $this->sortDirection = $this->sortDirection == 'desc' ? 'asc' : 'desc';
+            return;
+        }
 
-        $this->sortDirection = $this->sortDirection == 'asc' ? 'desc' : 'asc';
+        $this->sortBy = $field;
+        $this->sortDirection = 'desc';
     }
 
     public function setStatus($id, $status)
