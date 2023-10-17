@@ -8,6 +8,7 @@ use Livewire\Component;
 class UserDatatable extends Component
 {
     public $search = '';
+    public $perPage = 25;
 
     public function mount()
     {
@@ -21,7 +22,7 @@ class UserDatatable extends Component
                 ->when(
                     strlen($this->search) > 3,
                     fn($query) => $query->search($this->search)
-                )->paginate(),
+                )->paginate($this->perPage),
         ]);
     }
 }
