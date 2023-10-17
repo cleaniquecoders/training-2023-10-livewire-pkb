@@ -58,6 +58,8 @@ class UserDatatable extends Component
             array_keys($this->selectedRows),
             $status
         );
+
+        $this->resetPage();
     }
 
     public function setStatus(int|array $id, $status)
