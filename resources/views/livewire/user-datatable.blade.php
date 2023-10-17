@@ -14,7 +14,6 @@
             <div class="flex justify-end gap-2 mt-4">
 
                 <div class="flex justify-between">
-                    {{-- <x-label for="status" value="{{ __('Status') }}" /> --}}
                     <select wire:model.live="isActive"
                         class=" border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-gray-500 dark:focus:border-gray-600 focus:ring-gray-500 dark:focus:ring-gray-600 rounded-md shadow-sm">
                         <option value="">All</option>
@@ -41,29 +40,66 @@
             </div>
 
             {{-- Listing here --}}
-            <div>
-                <ul role="list" class="divide-y divide-gray-100">
-                    @forelse($users as $user)
-                        <li class="mx-4 flex justify-between gap-x-6 py-5 m-4 bg-white shadow-md border border-slate-100">
-                            <div class="flex min-w-0 gap-x-4 mx-4">
-                                <img class="h-12 w-12 flex-none rounded-full bg-gray-50"
-                                    src="{{ $user->profile_photo_url }}" alt="{{ $user->name }}">
-                                <div class="min-w-0 flex-auto">
-                                    <p class="text-sm font-semibold leading-6 text-gray-900">{{ $user->name }}</p>
-                                    <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $user->email }}</p>
-                                </div>
-                            </div>
-                            <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end mx-4">
-                                <p class="text-sm leading-6 text-gray-900">Co-Founder / CEO</p>
-                                <p class="mt-1 text-xs leading-5 text-gray-500">Last seen <time
-                                        datetime="2023-01-23T13:23Z">3h ago</time>
-                                </p>
-                            </div>
-                        </li>
-                    @empty
-                        <li class="text-center">No users found.</li>
-                    @endforelse
-                </ul>
+            <div class="bg-white border border-slate-300 rounded-md shadow-md m-4">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                    <table class="min-w-full divide-y divide-gray-300">
+                        <thead>
+                            <tr>
+                                <th scope="col"
+                                    class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
+                                    Name
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    E-mail
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    E-mail Verified At
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">
+                                    Joined At
+                                </th>
+                                <th scope="col" class="px-3 py-3.5 text-sm font-semibold text-gray-900 text-center">
+                                    Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            <tr>
+                                <td>
+                                    <p class="text-center italic my-4 py-4 text-sm w-full" wire:loading>
+                                        Populating data...
+                                    </p>
+                                </td>
+                            </tr>
+                            @foreach ($users as $user)
+                                <tr>
+                                    <td
+                                        class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                        {{ $user->name }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $user->email }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $user->email_verified_at }}
+                                    </td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
+                                        {{ $user->created_at }}</td>
+                                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 justify-center flex">
+                                        <x-secondary-button class="mx-2">
+                                            View
+                                        </x-secondary-button>
+                                        <x-button class="mx-2">
+                                            Update
+                                        </x-button>
+                                        <x-button
+                                            onclick="confirm('Are you sure want to delete {{ $user->name }} ?') || event.stopImmediatePropagation()"
+                                            wire:click="removeUser({{ $user->id }})" class="bg-red-700 mx-2">
+                                            Delete
+                                        </x-button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
             <div class="flex justify-between mx-4">
