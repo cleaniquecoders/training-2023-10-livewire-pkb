@@ -36,7 +36,8 @@ Route::middleware([
 
     Route::get('/contact-us', ContactUs::class);
 
-    Route::get('/users', UserDatatable::class);
+    // Route::get('/users', UserDatatable::class);
+    Route::view('users', 'users.index');
 });
 
 Route::post('locale/{locale}', function($locale){

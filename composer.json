@@ -13,6 +13,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "livewire/livewire": "^3.0",
+        "power-components/livewire-powergrid": "^5.1",
         "predis/predis": "^2.2"
     },
     "require-dev": {
