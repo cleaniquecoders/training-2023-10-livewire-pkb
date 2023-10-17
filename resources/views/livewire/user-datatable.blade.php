@@ -7,7 +7,7 @@
 
     <div>
         {{-- Search / Filter Components --}}
-        <div class="max-w-7xl mx-4 py-10 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <x-input wire:model.live.debounce.500ms="search" class="w-full"
                 placeholder="Search user by name or email..." />
 
@@ -24,8 +24,6 @@
                 </div>
 
             </div>
-
-
         </div>
 
         {{-- User Listing --}}
