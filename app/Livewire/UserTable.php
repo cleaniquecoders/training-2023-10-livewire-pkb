@@ -53,7 +53,12 @@ final class UserTable extends PowerGridComponent
 
            /** Example of custom column using a closure **/
             ->addColumn('name_lower', fn (User $model) => strtolower(e($model->name)))
-
+            ->addColumn('status', function (User $model) {
+                return (
+                    $model->is_active && !empty($model->email_verified_at)
+                    ? 'Active' : 'Inactive'
+                );
+            })
             ->addColumn('email')
             ->addColumn('created_at_formatted', fn (User $model) => Carbon::parse($model->created_at)->format('d/m/Y H:i:s'));
     }
@@ -61,12 +66,16 @@ final class UserTable extends PowerGridComponent
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id'),
+            // Column::make('Id', 'id'),
             Column::make('Name', 'name')
                 ->sortable()
                 ->searchable(),
 
             Column::make('Email', 'email')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Status', 'status')
                 ->sortable()
                 ->searchable(),
 
@@ -83,6 +92,11 @@ final class UserTable extends PowerGridComponent
             Filter::inputText('name')->operators(['contains']),
             Filter::inputText('email')->operators(['contains']),
             Filter::datetimepicker('created_at'),
+            Filter::boolean('status')
+                ->label('Active', 'Inactive')
+                ->builder(function (Builder $query, string $value) {
+                    return $query->where('is_active', $value === 'true' ? 1 : 0);
+                })
         ];
     }
 
