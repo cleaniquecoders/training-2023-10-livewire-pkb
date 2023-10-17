@@ -11,14 +11,21 @@
             <x-input wire:model.live.debounce.500ms="search" class="w-full"
                 placeholder="Search user by name or email..." />
 
-            <div class="flex justify-between">
-                <span class="my-2">Search for: <span class="italic" x-text="$wire.search"></span></span>
+            <div class="flex justify-end gap-2 mt-4">
 
-                <div class="my-2" wire:loading>
-                    Searching...
+                <div class="flex justify-between">
+                    {{-- <x-label for="status" value="{{ __('Status') }}" /> --}}
+                    <select wire:model.live="isActive"
+                        class=" border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-gray-500 dark:focus:border-gray-600 focus:ring-gray-500 dark:focus:ring-gray-600 rounded-md shadow-sm">
+                        <option value="">All</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
+                    </select>
                 </div>
 
             </div>
+
+
         </div>
 
         {{-- User Listing --}}
