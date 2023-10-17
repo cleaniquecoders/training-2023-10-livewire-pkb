@@ -25,6 +25,15 @@
             </div>
         </div>
 
+        <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+            <div class="flex justify-end gap-2 mt-4">
+
+                <x-button wire:click="updateUsersStatus(1)">Set As Active</x-button>
+                <x-button wire:click="updateUsersStatus(0)">Set As Inactive</x-button>
+
+            </div>
+        </div>
+
         {{-- User Listing --}}
         <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
             <div class="flex justify-between mx-4">
@@ -45,6 +54,9 @@
                     <table class="min-w-full divide-y divide-gray-300">
                         <thead>
                             <tr>
+                                <th scope="col">
+
+                                </th>
                                 <th scope="col" wire:click="setSort('name')"
                                     class="cursor-pointer py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900">
                                     <x-sortable :sortDirection="$sortDirection" label="Name" :show="$sortBy == 'name'"  />
@@ -71,6 +83,10 @@
                             </tr>
                             @foreach ($users as $user)
                                 <tr>
+                                    <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
+                                        <input type="checkbox" wire:model="selectedRows.{{ $user->id }}"
+                                            {{ in_array($user->id, $selectedRows) ? 'checked' : '' }} />
+                                    </td>
                                     <td
                                         class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">
                                         {{ $user->name }}</td>

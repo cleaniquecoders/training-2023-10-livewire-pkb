@@ -26,6 +26,8 @@ class UserDatatable extends Component
     #[Url]
     public $sortDirection = 'asc';
 
+    public $selectedRows = [];
+
     public function removeUser($id)
     {
         if(auth()->user()->id == $id) {
@@ -46,13 +48,29 @@ class UserDatatable extends Component
         $this->sortDirection = 'desc';
     }
 
-    public function setStatus($id, $status)
+    public function updateUsersStatus($status)
     {
-        if(auth()->user()->id == $id) {
+        if(! count($this->selectedRows)) {
             return;
         }
 
-        User::where('id', $id)->update([
+        $this->setStatus(
+            array_keys($this->selectedRows),
+            $status
+        );
+    }
+
+    public function setStatus(int|array $id, $status)
+    {
+        if(is_int($id)) {
+            $id = [$id];
+        }
+
+        if(in_array(auth()->user()->id, $id)) {
+            return;
+        }
+
+        User::whereIn('id', $id)->update([
             'is_active' => $status,
         ]);
     }
