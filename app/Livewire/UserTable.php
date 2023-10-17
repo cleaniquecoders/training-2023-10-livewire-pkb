@@ -20,6 +20,29 @@ final class UserTable extends PowerGridComponent
 {
     use WithExport;
 
+    public function activate()
+    {
+        if((! count($this->checkboxValues))) {
+            return;
+        }
+
+
+        User::whereIn('id', $this->checkboxValues)->update([
+            'is_active' => true,
+        ]);
+    }
+
+    public function deactivate()
+    {
+        if((! count($this->checkboxValues))) {
+            return;
+        }
+
+        User::whereIn('id', $this->checkboxValues)->update([
+            'is_active' => false,
+        ]);
+    }
+
     public function setUp(): array
     {
         $this->showCheckBox();
@@ -28,7 +51,10 @@ final class UserTable extends PowerGridComponent
             Exportable::make('export')
                 ->striped()
                 ->type(Exportable::TYPE_XLS, Exportable::TYPE_CSV),
-            Header::make()->showSearchInput(),
+            Header::make()
+                ->showToggleColumns()
+                ->showSearchInput()
+                ->includeViewOnTop('users.datatable.bulk-actions'),
             Footer::make()
                 ->showPerPage()
                 ->showRecordCount(),
