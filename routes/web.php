@@ -4,6 +4,7 @@ use App\Livewire\Counter;
 use App\Livewire\Search;
 use App\Models\Article;
 use App\Livewire\ContactUs;
+use App\Livewire\UserDatatable;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,7 @@ Route::middleware([
 
     Route::get('/contact-us', ContactUs::class);
 
+    Route::get('/users', UserDatatable::class);
 });
 
 Route::post('locale/{locale}', function($locale){
