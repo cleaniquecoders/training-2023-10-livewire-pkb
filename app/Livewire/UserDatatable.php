@@ -11,9 +11,13 @@ class UserDatatable extends Component
     public $perPage = 15;
     public $isActive;
 
-    public function mount()
+    public function removeUser($id)
     {
+        if(auth()->user()->id == $id) {
+            return;
+        }
 
+        User::where('id', $id)->delete();
     }
 
     public function render()
