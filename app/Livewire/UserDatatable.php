@@ -4,9 +4,12 @@ namespace App\Livewire;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class UserDatatable extends Component
 {
+    use WithPagination;
+    
     public $search = '';
     public $perPage = 15;
     public $isActive;
