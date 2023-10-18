@@ -62,3 +62,6 @@ Route::get('articles', function() {
 });
 
 Route::get('/counter', Counter::class);
+
+
+Route::view('alpine', 'alpine');
