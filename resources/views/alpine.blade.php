@@ -1,4 +1,14 @@
 <x-guest-layout>
+
+    <div class="flex justify-center mx-auto my-8 max-w-7xl">
+        <ul>
+            <li class="my-2"><x-toggle id="send-notifications" inputName="sendNotifications">Send notifications</x-toggle></li>
+            <li class="my-2"><x-toggle id="send-reply" inputName="sendReply">Send reply</x-toggle></li>
+            <li class="my-2"><x-toggle id="enable-site" inputName="enableSite">Enable Website</x-toggle></li>
+            <li class="my-2"><x-toggle id="dark-mode" inputName="darkmode">Dark Mode</x-toggle></li>
+        </ul>
+    </div>
+
     <div class="flex justify-center mx-auto my-8 max-w-7xl">
         <div x-data="{ count: 0 }">
             <p class="text-center w-full" x-text="count"></p>
@@ -265,25 +275,5 @@
     </div>
 
 
-    <div class="flex justify-center mx-auto my-8 max-w-7xl">
 
-        <!-- Toggle -->
-        <div x-data="{ value: false }" class="flex items-center justify-center" x-id="['toggle-label']">
-            <input type="hidden" name="sendNotifications" :value="value">
-
-            <!-- Label -->
-            <label @click="$refs.toggle.click(); $refs.toggle.focus()" :id="$id('toggle-label')"
-                class="text-gray-900 font-medium">
-                Send notifications
-            </label>
-
-            <!-- Button -->
-            <button x-ref="toggle" @click="value = ! value" type="button" role="switch" :aria-checked="value"
-                :aria-labelledby="$id('toggle-label')" :class="value ? 'bg-slate-400' : 'bg-slate-300'"
-                class="relative ml-4 inline-flex w-14 rounded-full py-1 transition">
-                <span :class="value ? 'translate-x-7' : 'translate-x-1'"
-                    class="bg-white h-6 w-6 rounded-full transition shadow-md" aria-hidden="true"></span>
-            </button>
-        </div>
-    </div>
 </x-guest-layout>
