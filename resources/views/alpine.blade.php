@@ -226,4 +226,41 @@
             </div>
         </div>
     </div>
+
+    <div class="flex justify-center mx-auto my-8 max-w-7xl">
+        <x-tab>
+            <x-slot name="navigation">
+                <x-tab-nav>Tab 1</x-tab-nav>
+                <x-tab-nav>Tab 2</x-tab-nav>
+                <x-tab-nav>Tab 3</x-tab-nav>
+            </x-slot>
+
+            <x-tab-content>
+                <h2 class="text-xl font-bold">Tab 1 Content</h2>
+                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
+                    quo sequi error quibusdam quas temporibus animi sapiente eligendi! Deleniti minima velit
+                    recusandae iure.</p>
+                <button class="mt-5 rounded-md border border-gray-200 px-4 py-2 text-sm">Something
+                    focusable</button>
+            </x-tab-content>
+
+            <x-tab-content>
+                <h2 class="text-xl font-bold">Tab 2 Content</h2>
+                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
+                    quo sequi error quibusdam quas temporibus animi sapiente eligendi! Deleniti minima velit
+                    recusandae iure.</p>
+                <button class="mt-5 rounded-md border border-gray-200 px-4 py-2 text-sm">Something
+                    focusable</button>
+            </x-tab-content>
+
+            <x-tab-content>
+                <h2 class="text-xl font-bold">Tab 3 Content</h2>
+                <p class="mt-2 text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio,
+                    quo sequi error quibusdam quas temporibus animi sapiente eligendi! Deleniti minima velit
+                    recusandae iure.</p>
+                <button class="mt-5 rounded-md border border-gray-200 px-4 py-2 text-sm">Something
+                    focusable</button>
+            </x-tab-content>
+        </x-tab>
+    </div>
 </x-guest-layout>
